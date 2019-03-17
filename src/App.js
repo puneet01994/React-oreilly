@@ -1,44 +1,67 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import Person from './Person/Person'
 
-class App extends Component {
+const App = props => {
   // Every time the state is changed, It will rerender the DOM/Update it.
   // Also, the state will be available only if we are using class based Components extends Component.
-  state = {
-    person: [
-      {name: "Puneet", age: "24"},
-      {name: "Kapil", age: "23"},
-      {name: "Meghali", age: "25"}
-    ]
-  };
+    const [personState, setPersonState] = useState({
+      person: [
+        {name: "Puneet", age: "24"},
+        {name: "Kapil", age: "23"},
+        {name: "Meghali", age: "25"}
+      ],
+      otherVvalue: 'some other value.'
+    });
 
-  switchNameHandler = () => {
-    // console.log("switch name clicked.")
-    this.setState(
-      {
-        person: [
-          {name: "Tommy", age: "24"},
-          {name: "Kapil", age: "23"},
-          {name: "Meghali", age: "25"}
-        ]
-      });
-  };
+    const [otherstate, setOtherState] = useState('use other state.');
 
-  render() {
+    const switchNameHandler = () => {
+        // console.log("switch name clicked.")
+        setPersonState(
+          {
+            person: [
+              {name: "Tommy", age: "24"},
+              {name: "Kapil", age: "23"},
+              {name: "Meghali", age: "25"}
+            ]
+          });
+      };
+
     return (
       <div className="App">
         <h1>Hi, You are using react.</h1>
         {/* {this.switchNameHandler()} if we will use () with this method then it will automatically call the function while rendering, 
               but we want it to be called on click event. (So, don't use "()" with function name.")  */}
-        <button onClick={this.switchNameHandler}>Switch Names</button>
-        <Person name={this.state.person[0].name} age={this.state.person[0].age}/>
-        <Person name={this.state.person[1].name} age={this.state.person[1].age}> My Hobbies: Racing</Person>
-        <Person name={this.state.person[2].name} age={this.state.person[2].age}/>
+        <button onClick={switchNameHandler}>Switch Names</button>
+        <Person name={personState.person[0].name} age={personState.person[0].age}/>
+        <Person name={personState.person[1].name} age={personState.person[1].age}> My Hobbies: Racing</Person>
+        <Person name={personState.person[2].name} age={personState.person[2].age}/>
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', {}, 'Above written code will be compiled in this manner.'));
   }
-}
 
 export default App;
+
+
+
+// state = {
+//   person: [
+//     {name: "Puneet", age: "24"},
+//     {name: "Kapil", age: "23"},
+//     {name: "Meghali", age: "25"}
+//   ]
+// };
+
+// switchNameHandler = () => {
+//   // console.log("switch name clicked.")
+//   this.setState(
+//     {
+//       person: [
+//         {name: "Tommy", age: "24"},
+//         {name: "Kapil", age: "23"},
+//         {name: "Meghali", age: "25"}
+//       ]
+//     });
+// };
