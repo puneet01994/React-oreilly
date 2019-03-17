@@ -36,12 +36,22 @@ class App extends Component {
   };
 
   render() {
+
+    // Use inline styling only in case if you want to scope your style for this component.
+    const style={
+      backgroundColor: "White",
+      font: "inherit",
+      border: "1px solid blue",
+      padding: "10px",
+      cursor: "pointer"
+    }
+
     return (
       <div className="App">
         <h1>Hi, You are using react.</h1>
         {/* {this.switchNameHandler()} if we will use () with this method then it will automatically call the function while rendering, 
               but we want it to be called on click event. (So, don't use "()" with function name.")  */}
-        <button onClick={this.switchNameHandler.bind(this, "Tommy")}>Switch Names</button>
+        <button style={style} onClick={this.switchNameHandler.bind(this, "Tommy")}>Switch Names</button>
         <Person 
         name={this.state.person[0].name} age={this.state.person[0].age}
         />
