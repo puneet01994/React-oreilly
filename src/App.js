@@ -10,7 +10,8 @@ class App extends Component {
       {name: "Puneet", age: "24"},
       {name: "Kapil", age: "23"},
       {name: "Meghali", age: "25"}
-    ]
+    ],
+    stateShowPerson: false
   };
 
   switchNameHandler = (newName) => {
@@ -35,10 +36,15 @@ class App extends Component {
     });
   };
 
+  togglePersonHandler = () => {
+    const currentstate = this.state.stateShowPerson;
+    this.setState({stateShowPerson: ! currentstate});
+  };
+
   render() {
 
     // Use inline styling only in case if you want to scope your style for this component.
-    const style={
+    const style1={
       backgroundColor: "White",
       font: "inherit",
       border: "1px solid blue",
@@ -51,20 +57,25 @@ class App extends Component {
         <h1>Hi, You are using react.</h1>
         {/* {this.switchNameHandler()} if we will use () with this method then it will automatically call the function while rendering, 
               but we want it to be called on click event. (So, don't use "()" with function name.")  */}
-        <button style={style} onClick={this.switchNameHandler.bind(this, "Tommy")}>Switch Names</button>
-        <Person 
-        name={this.state.person[0].name} age={this.state.person[0].age}
-        />
-        <Person
-        name={this.state.person[1].name}
-        age={this.state.person[1].age} 
-        click={this.switchNameHandler.bind(this, "Puneet!!")}
-        change={this.nameChange}> 
-        My Hobbies: Racing
-        </Person>
-        <Person 
-        name={this.state.person[2].name} age={this.state.person[2].age}
-        />
+        <button style={style1} onClick={this.togglePersonHandler}>Toggle Person</button>
+        {this.state.stateShowPerson === true? 
+        <div>
+          <Person 
+          name={this.state.person[0].name} age={this.state.person[0].age}
+          />
+          <Person
+          name={this.state.person[1].name}
+          age={this.state.person[1].age} 
+          click={this.switchNameHandler.bind(this, "Puneet!!")}
+          change={this.nameChange}> 
+          My Hobbies: Racing
+          </Person>
+          <Person 
+          name={this.state.person[2].name} age={this.state.person[2].age}
+          />
+        </div> 
+        : null
+        }
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', {}, 'Above written code will be compiled in this manner.'));
