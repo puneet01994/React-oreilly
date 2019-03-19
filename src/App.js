@@ -52,13 +52,10 @@ class App extends Component {
       cursor: "pointer"
     }
 
-    return (
-      <div className="App">
-        <h1>Hi, You are using react.</h1>
-        {/* {this.switchNameHandler()} if we will use () with this method then it will automatically call the function while rendering, 
-              but we want it to be called on click event. (So, don't use "()" with function name.")  */}
-        <button style={style1} onClick={this.togglePersonHandler}>Toggle Person</button>
-        {this.state.stateShowPerson === true? 
+    let persons = null
+
+    if (this.state.stateShowPerson){
+      persons = (
         <div>
           <Person 
           name={this.state.person[0].name} age={this.state.person[0].age}
@@ -74,8 +71,16 @@ class App extends Component {
           name={this.state.person[2].name} age={this.state.person[2].age}
           />
         </div> 
-        : null
-        }
+      );
+    }
+
+    return (
+      <div className="App">
+        <h1>Hi, You are using react.</h1>
+        {/* {this.switchNameHandler()} if we will use () with this method then it will automatically call the function while rendering, 
+              but we want it to be called on click event. (So, don't use "()" with function name.")  */}
+        <button style={style1} onClick={this.togglePersonHandler}>Toggle Person</button>
+        {persons}
       </div>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', {}, 'Above written code will be compiled in this manner.'));
