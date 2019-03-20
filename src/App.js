@@ -30,7 +30,12 @@ class App extends Component {
   };
 
   deletePersonHandler = (index) => {
-    const person = this.state.person;
+    // Arrays are reference type. next line is not a good practice 
+    // const person = this.state.person;
+    // Use any of the below syntax:
+    // #1. const person = this.state.person.slice()
+    // #2. const person = [...this.state.person]
+    const person = [...this.state.person]
     person.splice(index, 1);
     this.setState({person: person});
   }
@@ -55,6 +60,7 @@ class App extends Component {
             return <Person 
             name={person.name}
             age={person.age}
+            // Any of the following 2 can b used.
             // click={this.deletePersonHandler.bind(index)}
             click={() => this.deletePersonHandler(index)}
             />
