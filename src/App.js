@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person'
+import Radium, { StyleRoot } from 'radium';
+import Person from './Person/Person';
 
 class App extends Component {
   // Every time the state is changed, It will rerender the DOM/Update it.
@@ -54,12 +55,17 @@ class App extends Component {
 
     // Use inline styling only in case if you want to scope your style for this component.
     const style1={
-      backgroundColor: "White",
+      backgroundColor: "Green",
+      color: "White",
       font: "inherit",
       border: "1px solid blue",
       padding: "10px",
-      cursor: "pointer"
-    }
+      cursor: "pointer",
+      ':hover': {
+        backgroundColor: "LightGreen",
+        color: "Black"
+      }
+    };
 
     let persons = null
 
@@ -79,19 +85,34 @@ class App extends Component {
           })}
           </div>
       );
+      style1.backgroundColor = "Blue"
+      style1[':hover'] = {
+        backgroundColor: "Blue",
+        color: "Black"
+      }
+    }
+    const classes = []
+    if(this.state.person.length <= 2){
+      classes.push('red');
+    }
+    if(this.state.person.length <= 1){
+      classes.push('bold');
     }
 
     return (
+      <StyleRoot>
       <div className="App">
         <h1>Hi, You are using react.</h1>
+        <p className={classes.join(' ')}>It is working really very good.</p>
         {/* {this.switchNameHandler()} if we will use () with this method then it will automatically call the function while rendering, 
               but we want it to be called on click event. (So, don't use "()" with function name.")  */}
         <button style={style1} onClick={this.togglePersonHandler}>Toggle Person</button>
         {persons}
       </div>
+      </StyleRoot>
     );
     // return React.createElement('div', {className: 'App'}, React.createElement('h1', {}, 'Above written code will be compiled in this manner.'));
   }
 }
 
-export default App;
+export default Radium(App);
