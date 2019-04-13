@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -53,16 +53,9 @@ class App extends Component {
   render() {
 
     // Use inline styling only in case if you want to scope your style for this component.
-    const style1={
-      backgroundColor: "Green",
-      color: "White",
-      font: "inherit",
-      border: "1px solid blue",
-      padding: "10px",
-      cursor: "pointer",
-    };
 
     let persons = null
+    let btnClass = '';
 
     if (this.state.stateShowPerson){
       persons = (
@@ -80,23 +73,24 @@ class App extends Component {
           })}
           </div>
       );
-      style1.backgroundColor = "Blue"
+      btnClass = classes.Red 
+
     }
-    const classes = []
+    const usedClasses = []
     if(this.state.person.length <= 2){
-      classes.push('red');
+      usedClasses.push(classes.red);
     }
     if(this.state.person.length <= 1){
-      classes.push('bold');
+      usedClasses.push(classes.bold);
     }
 
     return (
-      <div className="App">
+      <div className={ classes.App }>
         <h1>Hi, You are using react.</h1>
-        <p className={classes.join(' ')}>It is working really very good.</p>
+        <p className={usedClasses.join(' ')}>It is working really very good.</p>
         {/* {this.switchNameHandler()} if we will use () with this method then it will automatically call the function while rendering, 
               but we want it to be called on click event. (So, don't use "()" with function name.")  */}
-        <button style={style1} onClick={this.togglePersonHandler}>Toggle Person</button>
+        <button className= { btnClass } onClick={this.togglePersonHandler}>Toggle Person</button>
         {persons}
       </div>
     );
